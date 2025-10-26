@@ -1,0 +1,192 @@
+@import url(./button.css);
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition-duration: .00001s !important;
+        animation-duration: .00001s !important;
+    }
+}
+
+@property --evtx-in {
+    syntax: "<length>";
+    inherits: true;
+    initial-value: 0px;
+}
+
+@property --evty-in {
+    syntax: "<length>";
+    inherits: true;
+    initial-value: 0px;
+}
+
+@property --evtx-out {
+    syntax: "<length>";
+    inherits: true;
+    initial-value: 0px;
+}
+
+@property --evty-out {
+    syntax: "<length>";
+    inherits: true;
+    initial-value: 0px;
+}
+
+@property --cx {
+    syntax: "<length>";
+    inherits: true;
+    initial-value: 0px;
+}
+
+@property --cy {
+    syntax: "<length>";
+    inherits: true;
+    initial-value: 0px;
+}
+
+@property --radius {
+    syntax: "<length>";
+    inherits: true;
+    initial-value: 0px;
+}
+
+@property --radius-pct {
+    syntax: "<percentage>";
+    inherits: true;
+    initial-value: 0%;
+}
+
+@property --opacity-fg {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 0;
+}
+
+@property --theta {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0deg;
+}
+
+:root {
+    --evtx: 100dvw;
+    --evty: 100dvh;
+}
+
+
+.modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    display: grid;
+    align-content: center;
+    justify-content: center;
+
+    visibility: hidden;
+    pointer-events: none;
+
+    transition-duration: calc(var(--duration) / 2);
+    transition-timing-function: ease-in-out;
+}
+
+.modal.active {
+    visibility: visible;
+}
+
+.modal.open {
+    pointer-events: all;
+    transition-duration: var(--duration);
+}
+
+.modal > * {
+    opacity: var(--opacity-fg);
+}
+
+
+.basic {
+    --duration: .667s;
+    --radius-pct: 0%;
+    --opacity-fg: 0;
+
+    transition-property: --radius-pct, --opacity-fg;
+    transition-timing-function: ease-out;
+
+    background-color: #443355dd;
+    backdrop-filter: blur(.5em);
+
+    mask: radial-gradient(circle farthest-corner
+        at var(--evtx-out) var(--evty-out),
+        transparent,
+        transparent calc(100% - var(--radius-pct)),
+        black calc(100% - var(--radius-pct))
+    );
+}
+
+.basic.open {
+    --radius-pct: 100%;
+    --opacity-fg: 1;
+
+    mask: radial-gradient(circle farthest-corner
+        at var(--evtx-in) var(--evty-in),
+        black,
+        black var(--radius-pct),
+        transparent var(--radius-pct)
+    );
+}
+
+
+.orbit {
+    --duration: 1s;
+    --radius: 0;
+    --theta: 0deg;
+    --cx: var(--evtx-in);
+    --cy: var(--evty-in);
+
+    transition-property: --radius, --theta, --opacity-fg;
+
+    --x1: calc(var(--cx) + (cos(270deg - var(--theta)) * (180dvmax - var(--radius))));
+    --y1: calc(var(--cy) + (sin(270deg - var(--theta)) * (180dvmax - var(--radius))));
+    --x2: calc(var(--cx) + (cos(270deg - var(--theta) + 180deg) * (180dvmax - var(--radius))));
+    --y2: calc(var(--cy) + (sin(270deg - var(--theta) + 180deg) * (180dvmax - var(--radius))));
+
+    background-image: radial-gradient(circle calc(var(--radius) * 1.5)
+        at var(--x1) var(--y1)
+        , #ffaa44aa
+        , #ff8844aa
+        , #ff4466aa 75%
+        , transparent 100%
+    ), radial-gradient(circle calc(var(--radius) * 1.5)
+        at var(--x2) var(--y2)
+        , #ffaa44aa
+        , #ff8844aa
+        , #ff4466aa 75%
+        , transparent 100%
+    );
+    mask: radial-gradient(circle calc(var(--radius) * 1.5)
+        at var(--x1) var(--y1)
+        , black
+        , black 75%
+        , transparent 100%
+    )
+    , radial-gradient(circle calc(var(--radius) * 1.5)
+        at var(--x2) var(--y2)
+        , black
+        , black 75%
+        , transparent 100%
+    );
+
+    backdrop-filter: blur(.5em);
+}
+
+.orbit.open {
+    --radius: 90dvmax;
+    --theta: 135deg;
+    --opacity-fg: 1;
+
+    --x1: calc(var(--cx) + (cos(var(--theta)) * var(--radius)));
+    --y1: calc(var(--cy) + (sin(var(--theta)) * var(--radius)));
+    --x2: calc(var(--cx) + (cos(var(--theta) + 180deg) * var(--radius)));
+    --y2: calc(var(--cy) + (sin(var(--theta) + 180deg) * var(--radius)));
+}
