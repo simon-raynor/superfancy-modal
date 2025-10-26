@@ -61,6 +61,12 @@
     initial-value: 0;
 }
 
+@property --scale-fg {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 2;
+}
+
 @property --theta {
     syntax: "<angle>";
     inherits: true;
@@ -68,8 +74,18 @@
 }
 
 :root {
-    --evtx: 100dvw;
-    --evty: 100dvh;
+    --cx: 100dvw;
+    --cy: 100dvh;
+
+    --duration: 1s;
+
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+    max-width: 45em;
+    margin-inline: auto;
+    padding-inline: 1em;
 }
 
 
@@ -87,6 +103,7 @@
     visibility: hidden;
     pointer-events: none;
 
+    transition-property: none;
     transition-duration: calc(var(--duration) / 2);
     transition-timing-function: ease-in-out;
 }
@@ -100,8 +117,17 @@
     transition-duration: var(--duration);
 }
 
-.modal > * {
+.modal > div {
     opacity: var(--opacity-fg);
+
+    background: #ffffffaa;
+    padding: 1.5em 1.5em 2em;
+    margin: 1em;
+    max-width: 35em;
+}
+
+h2 {
+    margin: 0;
 }
 
 
@@ -189,4 +215,59 @@
     --y1: calc(var(--cy) + (sin(var(--theta)) * var(--radius)));
     --x2: calc(var(--cx) + (cos(var(--theta) + 180deg) * var(--radius)));
     --y2: calc(var(--cy) + (sin(var(--theta) + 180deg) * var(--radius)));
+}
+
+
+.slam {
+    --duration: .6667s;
+
+    transition-property: --radius-pct, --opacity-fg, --scale-fg;
+    transition-timing-function: ease-out, ease-in, ease-in;
+    
+    --opacity-fg: 0;
+    --radius-pct: 0%;
+    --scale-fg: 2;
+
+    --cx: var(--evtx-out);
+    --cy: var(--evty-out);
+}
+
+.slam:before,
+.slam:after {
+    content: ' ';
+    display: block;
+    height: 200%;
+    width: 200%;
+
+    position: absolute;
+    z-index: -1;
+
+    will-change: transform;
+
+    background: #44eeccaa;
+
+    backdrop-filter: blur(.5em);
+}
+.slam:before {
+    top: var(--cy);
+    left: var(--cx);
+    transform: translateX(-50%) translateY(calc(100% - var(--radius-pct)));
+}
+.slam:after {
+    top: calc(var(--cy) - 200%);
+    left: var(--cx);
+    transform: translateX(-50%) translateY(calc(var(--radius-pct) - 100%));
+}
+
+.slam.open {
+    --opacity-fg: 1;
+    --radius-pct: 100%;
+    --scale-fg: 1;
+
+    --cx: var(--evtx-in);
+    --cy: var(--evty-in);
+}
+
+.slam > div {
+    transform: scaleY(var(--scale-fg));
 }

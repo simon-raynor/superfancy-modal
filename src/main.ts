@@ -10,9 +10,10 @@ function init() {
             modal.style.setProperty('--evty-in', `${evt.pageY - window.scrollY}px`);
         }
         const classname = (evt.target as HTMLElement).getAttribute('data-modal')!;
+        modal.classList.add(classname);
+        modal.setAttribute('data-modal', classname);
         requestAnimationFrame(_ => {
-            modal.classList.add('open', 'active', classname);
-            modal.setAttribute('data-modal', classname)
+            modal.classList.add('open', 'active');
         });
     }
 
