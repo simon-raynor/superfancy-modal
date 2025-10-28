@@ -26,9 +26,11 @@
 
         <p>
             A small amount of JS is used to open/close the modals and to pass in the pointer position so that it
-            can be used in the animations. A11y needs work, using <code>&lt;dialog&gt;</code> will eventually make all that easy
-            but support is still spotty at best so I've used <code>&lt;div&gt;</code>s. There should at least be a <code>prefers-reduced-motion: reduce</code>
-            so that they're not totally disrespectful of others' needs.
+            can be used in the animations. A11y needs work, using <code>&lt;dialog&gt;</code> will eventually make that easy
+            but support is still spotty at best so I've used good ol' <code>&lt;div&gt;</code>s. There should at
+            least be a <code>prefers-reduced-motion: reduce</code> so that these are not totally disrespectful of others' needs.
+            They've work best for me in Chrome on my phone, I'm optimistic that this time iOS will play ball too
+            as Firefox seems happier than it did with <code>&lt;dialog&gt;</code>s.
         </p>
 
         <p>
@@ -37,7 +39,8 @@
             more interesting popups should apply anywhere you can currently do a simple fade. As with all motion
             design type stuff it behooves you to not overdo things; I'm not sure most of these example could be
             used in a banking or healthcare app, nor would you want these effects on common actions you might be
-            doing several times in a row. 
+            doing several times in a row. For important alerts, errors and "success!" messages though it could
+            be a good way to really get the point across.
         </p>
 
         <div class="btns">
