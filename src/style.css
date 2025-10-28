@@ -71,6 +71,7 @@ code {
     opacity: var(--opacity-fg);
 
     background: #ffffffaa;
+    box-shadow: 0 .25em 0 #222a;
     padding: 1.5em 1.5em 2em;
     margin: 1em;
     max-width: 35em;
@@ -154,6 +155,10 @@ code {
     backdrop-filter: blur(.5em);
 }
 
+.orbit.open > div {
+    transform: rotate(calc(var(--theta)/9 - 15deg)) skewY(calc(var(--theta)/9 - 15deg));
+}
+
 .orbit.open {
     --radius: 90dvmax;
     --radius-pct: 100%;
@@ -170,6 +175,7 @@ code {
 .slam {
     --duration: .75s;
     --radius-pct: 0%;
+    --scale-fg: 9;
 
     background: linear-gradient(
         45deg
@@ -189,16 +195,21 @@ code {
         , black
     );
 
-    transition-property: --radius-pct, --opacity-fg;
+    transition-property: --radius-pct, --scale-fg, --opacity-fg;
     transition-timing-function: ease-out;
     transition-duration: calc(var(--duration) / 4);
 }
 
+.slam > div {
+    transform: scaleY(var(--scale-fg));
+}
+
 .slam.open {
-    transition-timing-function: var(--easing-bounce), ease-in;
+    transition-timing-function: var(--easing-bounce), var(--easing-bounce), ease-in;
 
     --opacity-fg: 1;
     --radius-pct: 50%;
+    --scale-fg: 1;
 }
 
 
