@@ -9,6 +9,11 @@ function init() {
             modal.style.setProperty('--evtx-in', `${evt.pageX - window.scrollX}px`);
             modal.style.setProperty('--evty-in', `${evt.pageY - window.scrollY}px`);
         }
+        // check there's not previous left over
+        const previous = modal.getAttribute('data-modal');
+        if (previous) modal.classList.remove(previous);
+
+        // set class & data attr. based on button
         const classname = (evt.target as HTMLElement).getAttribute('data-modal')!;
         modal.classList.add(classname);
         modal.setAttribute('data-modal', classname);
@@ -37,7 +42,6 @@ function init() {
         //      a new one is triggered before this finishes? Or a
         //      timeout perhaps?
         modal.addEventListener('animationend', cleanup, { signal: ac.signal });
-
         modal.addEventListener('transitionend', cleanup, { signal: ac.signal });
     }
 

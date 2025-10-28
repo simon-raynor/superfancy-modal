@@ -107,43 +107,45 @@ h2 {
 
 
 .orbit {
-    --duration: 1s;
+    --duration: .667s;
     --radius: 0;
+    --radius-pct: 0%;
     --theta: 0deg;
     --cx: var(--evtx-in);
     --cy: var(--evty-in);
 
-    transition-property: --radius, --theta, --opacity-fg;
+    transition-property: --radius, --radius-pct, --theta, --opacity-fg;
+    transition-timing-function: ease-in, ease-out, ease-out, ease-in;
 
     --x1: calc(var(--cx) + (cos(270deg - var(--theta)) * (180dvmax - var(--radius))));
     --y1: calc(var(--cy) + (sin(270deg - var(--theta)) * (180dvmax - var(--radius))));
-    --x2: calc(var(--cx) + (cos(270deg - var(--theta) + 180deg) * (180dvmax - var(--radius))));
-    --y2: calc(var(--cy) + (sin(270deg - var(--theta) + 180deg) * (180dvmax - var(--radius))));
+    --x2: calc(var(--cx) + (cos(270deg - var(--theta) + 180deg) * (180dvmax - var(--radius))) * .8);
+    --y2: calc(var(--cy) + (sin(270deg - var(--theta) + 180deg) * (180dvmax - var(--radius))) * .8);
 
     background-image: radial-gradient(circle calc(var(--radius) * 1.5)
         at var(--x1) var(--y1)
         , #ffaa44aa
         , #ff8844aa
-        , #ff4466aa 75%
-        , transparent 100%
+        , #ff4466aa calc(var(--radius-pct) * .75)
+        , transparent var(--radius-pct)
     ), radial-gradient(circle calc(var(--radius) * 1.5)
         at var(--x2) var(--y2)
         , #ffaa44aa
         , #ff8844aa
-        , #ff4466aa 75%
-        , transparent 100%
+        , #ff4466aa calc(var(--radius-pct) * .75)
+        , transparent var(--radius-pct)
     );
     mask: radial-gradient(circle calc(var(--radius) * 1.5)
         at var(--x1) var(--y1)
         , black
-        , black 75%
-        , transparent 100%
+        , black calc(var(--radius-pct) * .75)
+        , transparent var(--radius-pct)
     )
     , radial-gradient(circle calc(var(--radius) * 1.5)
         at var(--x2) var(--y2)
         , black
-        , black 75%
-        , transparent 100%
+        , black calc(var(--radius-pct) * .75)
+        , transparent var(--radius-pct)
     );
 
     backdrop-filter: blur(.5em);
@@ -151,18 +153,27 @@ h2 {
 
 .orbit.open {
     --radius: 90dvmax;
+    --radius-pct: 100%;
     --theta: 135deg;
     --opacity-fg: 1;
 
     --x1: calc(var(--cx) + (cos(var(--theta)) * var(--radius)));
     --y1: calc(var(--cy) + (sin(var(--theta)) * var(--radius)));
-    --x2: calc(var(--cx) + (cos(var(--theta) + 180deg) * var(--radius)));
-    --y2: calc(var(--cy) + (sin(var(--theta) + 180deg) * var(--radius)));
+    --x2: calc(var(--cx) + (cos(var(--theta) + 180deg) * var(--radius)) * .5);
+    --y2: calc(var(--cy) + (sin(var(--theta) + 180deg) * var(--radius)) * .5);
 }
 
 
 .slam {
-    background: #dd2233cc;
+    --duration: .75s;
+    --radius-pct: 0%;
+
+    background: linear-gradient(
+        45deg
+        , #830d17cc
+        , #dd2233cc
+        , #830d17cc
+    );
     backdrop-filter: blur(.5em);
 
     mask: linear-gradient(
@@ -176,9 +187,8 @@ h2 {
     );
 
     transition-property: --radius-pct, --opacity-fg;
-    transition-timing-function: ease-in;
-
-    --radius-pct: 0%;
+    transition-timing-function: ease-out;
+    transition-duration: calc(var(--duration) / 4);
 }
 
 .slam.open {

@@ -8,3 +8,15 @@ button {
     font-weight: 500;
     font-size: 1em;
 }
+
+button:active {
+    padding: 1em 2em .75em;
+}
+
+
+.btns {
+    display: flex;
+    align-items: start;
+    flex-wrap: wrap;
+    gap: .75em;
+}
