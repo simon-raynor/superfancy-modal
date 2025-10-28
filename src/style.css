@@ -9,9 +9,6 @@
 }
 
 :root {
-    --cx: 100dvw;
-    --cy: 100dvh;
-
     --duration: 1s;
 
     /* thanks SO https://stackoverflow.com/questions/29786230/how-to-create-css-bounce-effect */
@@ -29,6 +26,14 @@ body {
     max-width: 45em;
     margin-inline: auto;
     padding-inline: 1em;
+}
+
+h2 {
+    margin: 0;
+}
+
+code {
+    font-size: 1em;
 }
 
 
@@ -67,10 +72,6 @@ body {
     padding: 1.5em 1.5em 2em;
     margin: 1em;
     max-width: 35em;
-}
-
-h2 {
-    margin: 0;
 }
 
 
@@ -196,4 +197,76 @@ h2 {
 
     --opacity-fg: 1;
     --radius-pct: 50%;
+}
+
+
+.drop {
+    --duration: 1s;
+    --radius: 0dvmax;
+    --radius2: 0dvmax;
+    --scale-fg: 3;
+    --opacity-fg: 0;
+
+    /* use --cx as a second y :) */
+    --cx: 0dvh;
+    --cy: 0dvh;
+
+    --x1: calc(100dvw - var(--evtx-in));
+    --x2: var(--evtx-in);
+
+    --y1: calc(150dvh - (2 * var(--cx)));
+    --y2: calc(150dvh - (2 * var(--cy)));
+
+    background-image: radial-gradient(circle var(--radius)
+        at var(--x1) var(--y1)
+        , #44aaffaa
+        , #5588ffaa
+        , #6644ffaa 75%
+        , transparent 100%
+    ), radial-gradient(circle var(--radius2)
+        at var(--x2) var(--y2)
+        , #aaff44aa
+        , #88ff55aa
+        , #44ff66aa 75%
+        , transparent 100%
+    );
+    mask: radial-gradient(circle var(--radius)
+        at var(--x1) var(--y1)
+        , black
+        , black 75%
+        , transparent 100%
+    ), radial-gradient(circle var(--radius2)
+        at var(--x2) var(--y2)
+        , black
+        , black 75%
+        , transparent 100%
+    );
+    backdrop-filter: blur(.5em);
+
+    transition-property: --cx, --radius, --cy, --radius2, --opacity-fg, --scale-fg;
+    transition-timing-function: ease-out;
+    transition-delay: 0s, 0s, calc(var(--duration) * .1), calc(var(--duration) * .1), 0s, 0s;
+}
+
+.drop > div {
+    transform: scaleY(calc(1 + (.25 * (var(--scale-fg) - 1))));
+    transform-origin: top center;
+}
+
+.drop.open {
+    --radius: 90dvmax;
+    --radius2: 90dvmax;
+    --scale-fg: 1;
+    --opacity-fg: 1;
+    --cx: 50dvh;
+    --cy: 50dvh;
+
+    --y1: var(--cx);
+    --y2: var(--cy);
+
+    transition-timing-function: var(--easing-bounce), ease-in, var(--easing-bounce), ease-in, ease-in, var(--easing-bounce);
+    transition-delay: calc(var(--duration) * .2), calc(var(--duration) * .2), 0s, 0s, 0s, calc(var(--duration) * .4);
+}
+.drop.open > div {
+    transform-origin: bottom center;
 }

@@ -40,6 +40,12 @@
     initial-value: 0px;
 }
 
+@property --radius2 {
+    syntax: "<length>";
+    inherits: true;
+    initial-value: 0px;
+}
+
 @property --radius-pct {
     syntax: "<percentage>";
     inherits: true;

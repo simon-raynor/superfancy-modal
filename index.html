@@ -12,15 +12,42 @@
     <main>
         <h1>superfancy-modal</h1>
 
-        <p>Even fancier than the last one I made. Supports iOS inshallah.</p>
+        <p>
+            Some examples of what can be achieved with modern CSS, every animation on this page is created with
+            pure CSS: transitions, gradients and masks.
+        </p>
 
         <div class="btns">
             <button data-modal="basic">Basic</button>
             <button data-modal="orbit">Orbit</button>
             <button data-modal="slam">Slam</button>
+            <button data-modal="drop">Drop</button>
         </div>
 
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus quo temporibus placeat ullam quisquam sequi ab cupiditate porro soluta iste dolorem eius, nemo ea, animi corrupti qui! Quaerat, ex totam!</p>
+        <p>
+            A small amount of JS is used to open/close the modals and to pass in the pointer position so that it
+            can be used in the animations. A11y needs work, using <code>&lt;dialog&gt;</code> will eventually make all that easy
+            but support is still spotty at best so I've used <code>&lt;div&gt;</code>s. There should at least be a <code>prefers-reduced-motion: reduce</code>
+            so that they're not totally disrespectful of others' needs.
+        </p>
+
+        <p>
+            The code is up at <a href="https://github.com/simon-raynor/superfancy-modal">https://github.com/simon-raynor/superfancy-modal</a>,
+            you are welcome to use it, adapt it, learn from it. The basic approach of using gradients and masks for
+            more interesting popups should apply anywhere you can currently do a simple fade. As with all motion
+            design type stuff it behooves you to not overdo things; I'm not sure most of these example could be
+            used in a banking or healthcare app, nor would you want these effects on common actions you might be
+            doing several times in a row. 
+        </p>
+
+        <div class="btns">
+            <button data-modal="basic">Basic</button>
+            <button data-modal="orbit">Orbit</button>
+            <button data-modal="slam">Slam</button>
+            <button data-modal="drop">Drop</button>
+        </div>
+
+        <p>Extra padding content. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus quo temporibus placeat ullam quisquam sequi ab cupiditate porro soluta iste dolorem eius, nemo ea, animi corrupti qui! Quaerat, ex totam!</p>
 
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis, minima rerum? Ex optio vel architecto quibusdam, consequatur molestiae nobis. Error voluptatum quibusdam nam ut similique doloremque aperiam quam repellendus odit!</p>
 
@@ -30,9 +57,10 @@
             <button data-modal="basic">Basic</button>
             <button data-modal="orbit">Orbit</button>
             <button data-modal="slam">Slam</button>
+            <button data-modal="drop">Drop</button>
         </div>
 
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus quo temporibus placeat ullam quisquam sequi ab cupiditate porro soluta iste dolorem eius, nemo ea, animi corrupti qui! Quaerat, ex totam!</p>
+        <p>Extra padding content. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus quo temporibus placeat ullam quisquam sequi ab cupiditate porro soluta iste dolorem eius, nemo ea, animi corrupti qui! Quaerat, ex totam!</p>
 
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis, minima rerum? Ex optio vel architecto quibusdam, consequatur molestiae nobis. Error voluptatum quibusdam nam ut similique doloremque aperiam quam repellendus odit!</p>
 
@@ -42,18 +70,7 @@
             <button data-modal="basic">Basic</button>
             <button data-modal="orbit">Orbit</button>
             <button data-modal="slam">Slam</button>
-        </div>
-
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus quo temporibus placeat ullam quisquam sequi ab cupiditate porro soluta iste dolorem eius, nemo ea, animi corrupti qui! Quaerat, ex totam!</p>
-
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis, minima rerum? Ex optio vel architecto quibusdam, consequatur molestiae nobis. Error voluptatum quibusdam nam ut similique doloremque aperiam quam repellendus odit!</p>
-
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora error minima labore incidunt. Ab velit hic nulla sed quam eaque ducimus, delectus voluptate repellendus! Provident laborum at doloribus qui porro.</p>
-
-        <div class="btns">
-            <button data-modal="basic">Basic</button>
-            <button data-modal="orbit">Orbit</button>
-            <button data-modal="slam">Slam</button>
+            <button data-modal="drop">Drop</button>
         </div>
     </main>
 
