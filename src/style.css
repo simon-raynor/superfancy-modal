@@ -283,3 +283,41 @@ code {
 .drop.open > div {
     transform-origin: bottom center;
 }
+
+
+.clock {
+    --duration: .5s;
+    --opacity-fg: 0;
+    --theta: 0deg;
+
+    --cx: var(--evtx-out);
+    --cy: var(--evty-out);
+
+    background: radial-gradient(
+        circle farthest-corner
+        at var(--cx) var(--cy)
+        , #77cc11aa
+        , #66bb1177
+    );
+
+    mask: conic-gradient(
+        at var(--cx) var(--cy)
+        , black
+        , var(--theta)
+        , black
+        , var(--theta)
+        , transparent
+    );
+    backdrop-filter: blur(.5em);
+
+    transition-property: --theta, --opacity-fg;
+    transition-timing-function: ease-out, ease-in;
+}
+
+.clock.open {
+    --opacity-fg: 1;
+    --theta: 360deg;
+
+    --cx: var(--evtx-in);
+    --cy: var(--evty-in);
+}
