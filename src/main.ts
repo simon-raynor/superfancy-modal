@@ -33,6 +33,9 @@ function init() {
             ac.abort();
         }
 
+        // TODO: do we need ...start handlers here too for in case
+        //      a new one is triggered before this finishes? Or a
+        //      timeout perhaps?
         modal.addEventListener('animationend', cleanup, { signal: ac.signal });
 
         modal.addEventListener('transitionend', cleanup, { signal: ac.signal });
