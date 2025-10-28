@@ -70,8 +70,8 @@ code {
 .modal > div {
     opacity: var(--opacity-fg);
 
-    background: #ffffffaa;
-    box-shadow: 0 .25em 0 #222a;
+    background: #ffffffbb;
+    border-bottom: .25em solid #222a;
     padding: 1.5em 1.5em 2em;
     margin: 1em;
     max-width: 35em;
@@ -287,8 +287,9 @@ code {
 
 .clock {
     --duration: .5s;
-    --opacity-fg: 0;
+    --opacity-fg: 1;
     --theta: 0deg;
+    --theta2: 0deg;
 
     --cx: var(--evtx-out);
     --cy: var(--evty-out);
@@ -310,13 +311,26 @@ code {
     );
     backdrop-filter: blur(.5em);
 
-    transition-property: --theta, --opacity-fg;
-    transition-timing-function: ease-out, ease-in;
+    transition-property: --theta, --theta2;
+    transition-timing-function: ease-out, ease-out;
+    transition-delay: 0s, calc(var(--duration) * .5)
+}
+
+.clock > div {
+    mask: conic-gradient(
+        at center
+        , black
+        , var(--theta2)
+        , black
+        , var(--theta2)
+        , transparent
+    );
 }
 
 .clock.open {
     --opacity-fg: 1;
     --theta: 360deg;
+    --theta2: 360deg;
 
     --cx: var(--evtx-in);
     --cy: var(--evty-in);

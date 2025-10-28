@@ -69,3 +69,9 @@
     inherits: true;
     initial-value: 0deg;
 }
+
+@property --theta2 {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0deg;
+}
