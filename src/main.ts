@@ -1,5 +1,3 @@
-import './style.css'
-
 function init() {
     const btns = document.querySelectorAll('.btns button');
     const modal = document.getElementById('modal')!;
